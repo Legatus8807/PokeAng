@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PokeName } from './PokeName';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'PokeAng';
+
+  transPoke(pokeName:PokeName) {
+
+  }
 }

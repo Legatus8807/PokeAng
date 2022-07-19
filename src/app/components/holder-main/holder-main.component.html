@@ -1,0 +1,5 @@
+<app-header></app-header>
+<app-input-name (onAddName)="transPoke($event)"></app-input-name>
+<p>{{poke1.id}}</p>
+<p>{{poke1.types[0].type.name}}</p>
+<p>{{poke1.types[1].type.name || 'N/A'}}</p>
