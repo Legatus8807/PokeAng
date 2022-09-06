@@ -1,0 +1,9 @@
+<form class="add-name" (ngSubmit)="onUpdateSubmit()">
+  <div class="update-block">
+    <div class="form-control">
+      <!--<label for="pokeName">Name</label>-->
+      <input type="text" name="pokeName" [(ngModel)]="pokeName" id="pokeName" placeholder="Change Name">
+    </div>
+    <input type="submit" value="Save Name" class="btn-block">
+  </div>
+</form>

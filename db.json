@@ -1,0 +1,56 @@
+{
+  "pokemon": [
+    {
+      "id": 1,
+      "name": "bulbasaur",
+      "dexNum": 1,
+      "type1": "grass",
+      "type2": "poison",
+      "hp": 45,
+      "atk": 49,
+      "def": 49,
+      "spA": 65,
+      "spD": 65,
+      "spe": 45
+    },
+    {
+      "name": "charizard",
+      "type1": "fire",
+      "type2": "flying",
+      "dexNum": 6,
+      "hp": 78,
+      "atk": 84,
+      "def": 78,
+      "spA": 109,
+      "spD": 85,
+      "spe": 100,
+      "id": 2
+    },
+    {
+      "name": "charizard",
+      "type1": "fire",
+      "type2": "flying",
+      "dexNum": 6,
+      "hp": 78,
+      "atk": 84,
+      "def": 78,
+      "spA": 109,
+      "spD": 85,
+      "spe": 100,
+      "id": 3
+    },
+    {
+      "name": "bulbasaur",
+      "type1": "grass",
+      "type2": "poison",
+      "dexNum": 1,
+      "hp": 45,
+      "atk": 49,
+      "def": 49,
+      "spA": 65,
+      "spD": 65,
+      "spe": 45,
+      "id": 4
+    }
+  ]
+}

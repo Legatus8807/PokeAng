@@ -1,5 +1,50 @@
-<app-header></app-header>
-<app-input-name (onAddName)="transPoke($event)"></app-input-name>
+<!--<app-input-name (onAddName)="transPoke($event)"></app-input-name>-->
+<app-db-button (onAddNameDb)="pushPoke($event)"></app-db-button>
+
+<!-- Old Old Way
 <p>{{poke1.id}}</p>
-<p>{{poke1.types[0].type.name}}</p>
-<p>{{poke1.types[1].type.name || 'N/A'}}</p>
+<p *ngFor="let Type of poke1.types">
+  {{ Type.type.name }}
+</p>
+      <p>{{poke1.types[1].type.name || 'N/A'}}</p>
+ One Way
+  <p *ngFor="let Stat of poke1.stats; let i = index">{{poke1.stats[i].stat.name}} : {{ poke1.stats[i].base_stat }}</p>
+
+
+<p *ngFor="let Stat of poke1.stats">{{ Stat.stat.name }} : {{ Stat.base_stat }}</p>
+-->
+
+<!-- New Old Way
+<p>{{ poke2.id}}</p>
+  <p>{{ poke2.type1 }}</p>
+  <p>{{ poke2.type2 }}</p>
+  <p>{{ poke2.hp }}</p>
+-->
+
+<!-- New Way  Try to make it a form-->
+<!--total/8 >= 1 ? current + 8 : total-->
+
+<div class="poke-card-wrapper">
+  <div *ngFor="let Poke of pokeArray" class="poke-card" [ngClass]="[Poke.type2 === 'Flying' && Poke.type1 === 'Normal' ? Poke.type2 : Poke.type1]">
+      <p>Name: {{ Poke.name }}</p>
+      <p>Pokedex Number: {{ Poke.dexNum }}</p>
+      <p>Type 1: {{ Poke.type1 }}</p>
+      <p>Type 2: {{ Poke.type2 }}</p>
+      <p>HP: {{ Poke.hp }}</p>
+      <p>Attack: {{ Poke.atk }}</p>
+      <p>Defense: {{ Poke.def }}</p>
+      <p>Special Attack: {{ Poke.spA }}</p>
+      <p>Special Defense: {{ Poke.spD }}</p>
+      <p>Speed: {{ Poke.spe }}</p>
+      <div>
+        <app-update-button [idVal]="Poke.id" (onChangeNameDb)="putPoke($event)"></app-update-button>
+        <app-delete-button [idVal]="Poke.id" (onDeleteDb)="removePoke($event)"></app-delete-button>
+      </div>
+      <!-- One Way
+        <p *ngFor="let Stat of poke1.stats; let i = index">{{poke1.stats[i].stat.name}} : {{ poke1.stats[i].base_stat }}</p> -->
+
+
+      <!--<p *ngFor="let Stat of poke1.stats">{{ Stat.stat.name }} : {{ Stat.base_stat }}</p>-->
+  </div>
+</div>
+

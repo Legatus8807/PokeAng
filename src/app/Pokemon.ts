@@ -5,7 +5,7 @@ export interface Pokemon {
   game_indices?: Index[]
   height: number
   held_items?: any[]
-  id: number
+  id: number // the pokedex number
   is_default?: boolean
   location_area_encounters: string
   moves?: Mfe[]
