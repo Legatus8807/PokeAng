@@ -249,4 +249,12 @@ export class PokeService {
     return this.subject.asObservable();
   }
 
+  /*updatePage(currentPage:number):Observable<number> {
+
+  }*/
+
+  getMaxPage(aLength:number):Observable<number> {
+    return of(Math.floor(aLength/8));
+  }
+
 }
