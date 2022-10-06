@@ -30,14 +30,6 @@ export class HolderMainComponent implements OnInit {
   ngOnInit(): void { // Change to get from array;
     //const poke2:PokeName = {name: 'bulbasaur'};
 
-    /* Getting from old Json Server
-    this.pokeService.getPoke().subscribe((pokeA:DbPokemon[]) => {
-      pokeA.forEach(poke => {
-        this.pokeArray.push(poke);
-      })
-    });
-    */
-
     this.pokeService.getPokeFromMongo().subscribe((pokeA:DbPokemon[]) => {
       this.pokeArray = [];
       pokeA.forEach(poke => {
@@ -46,41 +38,16 @@ export class HolderMainComponent implements OnInit {
       this.pokeService.updateSubject().next(this.pokeArray);
     });
 
-
-    /*
-    this.pokeService.getPokeFromApi(poke2).subscribe((pokeSend) => {
-      this.poke1 = pokeSend;
-    })
-    */
   }
-
-
-  transPoke(pokeName:PokeName) {
-    this.pokeService.getPokeFromApiNoTransform(pokeName).subscribe((pokeSend) => {
-      this.poke1 = pokeSend;
-      console.log(this.poke1.types[1]);
-    });
-  }
-
 
   pushPoke(pokeName: PokeName) {
-    /* For pushing to array
-    this.pokeService.addPoke(pokeName).subscribe(poke => {
-      this.pokeArray.push(poke);
-    })
-    */
-
+    // For pushing to array
     //Switched postWholePokeData to postPokeTo Mongo
     this.pokeService.getPokeFromApi(pokeName).subscribe(pokeApi => {
       const newPoke = pokeApi; // Can maybe skip this part
       this.pokeService.postPokeToMongo(newPoke).subscribe(poke => {
         this.pokeArray.push(poke);
-        /*
-        this.router.navigate(['/holder-component'])
-          .then(() => {
-            window.location.reload();
-          });
-        */
+
         this.ngOnInit();
       });
     })
@@ -92,20 +59,12 @@ export class HolderMainComponent implements OnInit {
     })
     */
 
-
-
-
   putPoke(pokeName:PokeName) {
     this.pokeService.getPokeFromApi(pokeName).subscribe(pokeApi => {
       this.pokeService.updatePoke(pokeApi, pokeName.id).subscribe(poke => {
         const index = this.pokeArray.findIndex(arrayPoke => {arrayPoke.id === poke.id});
         this.pokeArray[index] = poke;
-        /*
-        this.router.navigate(['/holder-component'])
-          .then(() => {
-            window.location.reload();
-          });
-        */
+
        this.ngOnInit();
       });
     });
@@ -118,8 +77,6 @@ export class HolderMainComponent implements OnInit {
       this.ngOnInit();
     });
   }
-
-
 
 }
 

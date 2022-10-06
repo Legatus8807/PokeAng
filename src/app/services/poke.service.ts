@@ -36,30 +36,6 @@ export class PokeService {
   constructor(private http:HttpClient) { }
 
   // Send url + entered_pokemon as a parameter, call in component function
-  /*
-  getPokeFromApi(pokeName:PokeName): Observable<Pokemon> {
-    this.pokeApiUrl = 'https://pokeapi.co/api/v2/pokemon/' + pokeName.name;
-
-    return this.http.get<Pokemon>(this.pokeApiUrl).pipe(map(poke => {
-      //let fakeTypes = [];
-      const fakeTypes = [...poke.types];
-
-      if(poke.types.length === 1) {
-        const newType:Type = {
-          slot: 1,
-          type: {name: 'N/A', url: 'N/A'}
-        }
-        fakeTypes.push(newType)
-      }
-
-      poke.types = fakeTypes;
-
-      this.pokeArray.push(poke);
-      this.pokeArray.forEach(poke => {console.log(poke.name)});
-      return poke;
-    }));
-  }
-  */
 
   getPokeFromApiNoTransform(pokeName:PokeName):Observable<Pokemon> {
     this.pokeApiUrl = 'https://pokeapi.co/api/v2/pokemon/' + pokeName.name;
@@ -87,30 +63,6 @@ export class PokeService {
     //return newPoke;
   }
 
-  /*
-  getPokeFromMongo(): Observable<DbPokemon[]> {
-    return this.http.get<{message: string, pokemon: any}>(this.pokeMongoUrl, httpOptions).pipe(map(pokeData => {
-      return pokeData.pokemon.map((poke: { _id: string; name: string; dexNum: number; type1: string; type2: string; hp: number; atk: number; def: number; spA: number; spD: number; spe: number; }) => {
-        const newPoke:DbPokemon = {
-          id: poke._id,
-          name: poke.name,
-          dexNum: poke.dexNum,
-          type1: poke.type1,
-          type2: poke.type2,
-          hp: poke.hp,
-          atk: poke.atk,
-          def: poke.def,
-          spA: poke.spA,
-          spD: poke.spD,
-          spe: poke.spe
-        }
-        return newPoke
-      })
-
-    }))
-    }
-*/
-
   getPokeFromMongo(): Observable<DbPokemon[]> {
     return this.http.get<any>(this.pokeMongoUrl).pipe(map(pokeData => {
       return pokeData.pokemon.map((poke:{
@@ -134,23 +86,11 @@ export class PokeService {
         return newPoke
       })
     }))
-
   }
 
 
   getPoke(): Observable<DbPokemon[]> {
     return this.http.get<DbPokemon[]>(this.pokeDbUrl);
-
-    /*
-    this.http.get<DbPokemon[]>(this.pokeDbUrl).subscribe(dbArray => {
-      dbArray.forEach((poke) => {
-        this.pokeDbArray.push(poke)
-      }
-
-    )})
-
-    return of([...this.pokeDbArray]);
-    */
   }
 
   addPoke(pokeName: PokeName): Observable<DbPokemon> { // user puts in pokemon name, then gets rest from API, and pushes it all to the database
@@ -158,71 +98,12 @@ export class PokeService {
 
     //let newPoke: DbPokemon;
     let newPromise: Promise<DbPokemon>; //Learn how to use promises
-    /*
-    this.http.get<Pokemon>(this.pokeApiUrl).subscribe(poke => {
-      newPoke = {
-        name: poke.name,
-        type1: poke.types[0].type.name,
-        type2: (poke.types[1] != null ? poke.types[1].type.name : 'N/A'),
-        dexNum: poke.id,
-        hp: poke.stats[0].base_stat,
-        atk: poke.stats[1].base_stat,
-        def: poke.stats[2].base_stat,
-        spA: poke.stats[3].base_stat,
-        spD: poke.stats[4].base_stat,
-        spe: poke.stats[5].base_stat
-      }
-
-     //this.pokeDbArray.push(this.newPoke);
-
-      //this.http.post<DbPokemon>(this.pokeDbUrl, newPoke, httpOptions)
-
-    });
-    */
 
     this.getPokeFromApi(pokeName).subscribe(poke => {
       const newPoke = poke;
     })
 
     return this.http.post<DbPokemon>(this.pokeMongoUrl, httpOptions) // switching to pokeMongoUrl from pokeDbUrl
-
-     //possibly put the get request as part of the subscription.subscribe()
-    //return this.http.post<DbPokemon[]>(this.pokeDbUrl, this.pokeDbArray, httpOptions)
-
-
-    //let newPoke!: Pokemon;
-    //let newPoke!: DbPokemon;
-    /*
-    const newPoke: Pokemon =  this.http.get<Pokemon>(this.pokeApiUrl).pipe(map(poke => {
-      const testPoke: Pokemon = {
-        height: poke.height,
-        id: poke.id,
-        location_area_encounters: poke.location_area_encounters,
-        name: poke.name,
-        stats: poke.stats,
-        types: poke.types
-      }
-      return testPoke
-    }))
-
-    const dbPoke: DbPokemon = {
-      name: newPoke.name,
-      type1: poke.types[0].type.name,
-      type2: (poke.types[1] != null ? poke.types[1].type.name : 'N/A'),
-      dexNum: poke.id,
-      hp: poke.stats[0].base_stat,
-      atk: poke.stats[1].base_stat,
-      def: poke.stats[2].base_stat,
-      spA: poke.stats[3].base_stat,
-      spD: poke.stats[4].base_stat,
-      spe: poke.stats[5].base_stat
-    }
-    */
-
-    // May need to create it as a DbPokemon
-
-    //return this.http.post<DbPokemon>('http://localhost:5000/pokemon', newPoke, httpOptions);
-
   }
 
   postWholePokeData(poke:DbPokemon) { //switching to pokeMongoUrl from pokeDbUrl
