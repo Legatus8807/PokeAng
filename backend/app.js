@@ -24,32 +24,6 @@ mongoose.connect('mongodb+srv://SpenceW:scw1988.@cluster0.abdevda.mongodb.net/Po
     console.log('Did not connect to database');
   });
 
-/*
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Headers",
-  "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  res.setHeader("Access-Control-Allow-Methods",
-  "GET, POST, PATCH, PUT, DELETE, OPTIONS"
-  );
-  next();
-});
-*/
-
-/* Old One with Message
-app.get('/pokemon', (req, res, next) => {
-  Pokemon.find()
-  .then(
-    documents => {
-      res.status(200).json({
-        message: 'Posts fetched successfully!',
-        pokemon: documents
-    });
-  });
-});
-*/
-
 app.get('/pokemon', (req, res, next) => {
   Pokemon.find({}).then(pokemon => {res.status(200).json({pokemon})});
 });
@@ -96,48 +70,4 @@ app.delete("/pokemon/:id", (req, res, next) => {
 })
 
 module.exports = app;
-
-/*
-
-router.get('/bulbasaur', (req, res, next) => {
-  const pokeNameInput1 = 'bulbasaur';
-  axios.get('https://pokeapi.co/api/v2/pokemon/' + pokeNameInput1)
-    .then((response) => {
-
-      //console.log(response.data.stats)
-
-      const bulba1 = new Pokemons({
-        name: (response.data.name[0].toUpperCase() + response.data.name.slice(1)),
-        type1: (response.data.types[0].type.name[0].toUpperCase()
-          + response.data.types[0].type.name.slice(1)),
-        type2: (response.data.types[1].type.name[0].toUpperCase()
-          + response.data.types[1].type.name.slice(1)),
-        hp: response.data.stats[0].base_stat,
-        atk: response.data.stats[1].base_stat,
-        def: response.data.stats[2].base_stat,
-        spA: response.data.stats[3].base_stat,
-        spD: response.data.stats[4].base_stat,
-        spe: response.data.stats[5].base_stat
-
-      });
-
-      bulba1.save();
-
-      res.render('bulbasaur.pug', {Pokemons: bulba1});
-      //res.redirect('/pokemon/bulbasaur');
-
-    }).catch((error) => {
-      console.log(error);
-      if(error) {
-        res.status(404);
-        console.log(error);
-        return;
-      }
-    });
-    //res.redirect('/pokemon/bulbasaur');
-   // res.location('/pokemon/bulbasaur')
-});
-
-*/
-//adding to git
 

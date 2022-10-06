@@ -1,29 +1,6 @@
 <!--<app-input-name (onAddName)="transPoke($event)"></app-input-name>-->
 <app-db-button (onAddNameDb)="pushPoke($event)"></app-db-button>
 
-<!-- Old Old Way
-<p>{{poke1.id}}</p>
-<p *ngFor="let Type of poke1.types">
-  {{ Type.type.name }}
-</p>
-      <p>{{poke1.types[1].type.name || 'N/A'}}</p>
- One Way
-  <p *ngFor="let Stat of poke1.stats; let i = index">{{poke1.stats[i].stat.name}} : {{ poke1.stats[i].base_stat }}</p>
-
-
-<p *ngFor="let Stat of poke1.stats">{{ Stat.stat.name }} : {{ Stat.base_stat }}</p>
--->
-
-<!-- New Old Way
-<p>{{ poke2.id}}</p>
-  <p>{{ poke2.type1 }}</p>
-  <p>{{ poke2.type2 }}</p>
-  <p>{{ poke2.hp }}</p>
--->
-
-<!-- New Way  Try to make it a form-->
-<!--total/8 >= 1 ? current + 8 : total-->
-
 <div class="poke-card-wrapper">
   <div *ngFor="let Poke of pokeArray" class="poke-card" [ngClass]="[Poke.type2 === 'Flying' && Poke.type1 === 'Normal' ? Poke.type2 : Poke.type1]">
       <p>Name: {{ Poke.name }}</p>

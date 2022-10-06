@@ -27,7 +27,7 @@ export class PokeService {
   private pokeDbArray:DbPokemon[] = [];
   //private updateInt:number = 0;
   private pokeApiUrl = '';
-  private pokeDbUrl = 'http://localhost:5000/pokemon/';
+  //private pokeDbUrl = 'http://localhost:5000/pokemon/';
   private pokeMongoUrl = 'http://localhost:5500/pokemon/';
 
   private tempName = 'bulbasaur'
@@ -36,11 +36,6 @@ export class PokeService {
   constructor(private http:HttpClient) { }
 
   // Send url + entered_pokemon as a parameter, call in component function
-
-  getPokeFromApiNoTransform(pokeName:PokeName):Observable<Pokemon> {
-    this.pokeApiUrl = 'https://pokeapi.co/api/v2/pokemon/' + pokeName.name;
-    return this.http.get<Pokemon>(this.pokeApiUrl);
-  }
 
   getPokeFromApi(pokeName:PokeName):Observable<DbPokemon> { //!!!!!!!!!!!!!!!!! Use This!!!!!!!!!!!!!!!!!!!!!
     this.pokeApiUrl = 'https://pokeapi.co/api/v2/pokemon/' + pokeName.name.toLowerCase();
@@ -88,26 +83,17 @@ export class PokeService {
     }))
   }
 
-
-  getPoke(): Observable<DbPokemon[]> {
-    return this.http.get<DbPokemon[]>(this.pokeDbUrl);
-  }
-
   addPoke(pokeName: PokeName): Observable<DbPokemon> { // user puts in pokemon name, then gets rest from API, and pushes it all to the database
     this.pokeApiUrl = 'https://pokeapi.co/api/v2/pokemon/' + pokeName.name;
 
     //let newPoke: DbPokemon;
-    let newPromise: Promise<DbPokemon>; //Learn how to use promises
+    //let newPromise: Promise<DbPokemon>; //Learn how to use promises
 
     this.getPokeFromApi(pokeName).subscribe(poke => {
       const newPoke = poke;
     })
 
     return this.http.post<DbPokemon>(this.pokeMongoUrl, httpOptions) // switching to pokeMongoUrl from pokeDbUrl
-  }
-
-  postWholePokeData(poke:DbPokemon) { //switching to pokeMongoUrl from pokeDbUrl
-    return this.http.post<DbPokemon>(this.pokeDbUrl, poke, httpOptions);
   }
 
   postPokeToMongo(poke:DbPokemon) { //remove return for mongo sub
