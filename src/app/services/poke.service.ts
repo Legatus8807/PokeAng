@@ -88,10 +88,11 @@ export class PokeService {
 
     //let newPoke: DbPokemon;
     //let newPromise: Promise<DbPokemon>; //Learn how to use promises
-
+    /*
     this.getPokeFromApi(pokeName).subscribe(poke => {
       const newPoke = poke;
     })
+    */
 
     return this.http.post<DbPokemon>(this.pokeMongoUrl, httpOptions) // switching to pokeMongoUrl from pokeDbUrl
   }

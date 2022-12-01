@@ -14,7 +14,8 @@ import { PokeService } from 'src/app/services/poke.service';
 })
 export class HolderMainComponent implements OnInit {
   private subject = new Subject<DbPokemon[]>()
-  @Input() idVal: number;
+  //@Input() idVal: number;
+  idVal: number;
   //@Input() current: number;
   //@Input() total: number;
   poke1!:Pokemon;
